@@ -1,0 +1,54 @@
+{
+  "id": "hero",
+  "type": "SharedSlice",
+  "name": "Hero",
+  "description": "Hero",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Hero Title",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Hero Description",
+            "placeholder": "Enter hospital description...",
+            "allowTargetBlank": true,
+            "multi": "paragraph"
+          }
+        },
+        "button_text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Button Text",
+            "placeholder": "Enter button text (e.g. Book now)...",
+            "allowTargetBlank": true,
+            "multi": "heading2"
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Hero Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -69,7 +69,7 @@ type ContentRelationshipFieldWithData<
   >;
 }[Exclude<TCustomType[number], string>["id"]];
 
-type HomepageDocumentDataSlicesSlice = never;
+type HomepageDocumentDataSlicesSlice = OurServicesSlice | HeroSlice;
 
 /**
  * Content for Homepage documents
@@ -136,6 +136,153 @@ export type HomepageDocument<Lang extends string = string> =
 
 export type AllDocumentTypes = HomepageDocument;
 
+/**
+ * Primary content in *Hero → Default → Primary*
+ */
+export interface HeroSliceDefaultPrimary {
+  /**
+   * Hero Title field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Hero Description field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter hospital description...
+   * - **API ID Path**: hero.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Button Text field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Enter button text (e.g. Book now)...
+   * - **API ID Path**: hero.default.primary.button_text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  button_text: prismic.RichTextField;
+
+  /**
+   * Hero Image field in *Hero → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Hero Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<HeroSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Hero*
+ */
+type HeroSliceVariation = HeroSliceDefault;
+
+/**
+ * Hero Shared Slice
+ *
+ * - **API ID**: `hero`
+ * - **Description**: Hero
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
+
+/**
+ * Primary content in *OurServices → Default → Primary*
+ */
+export interface OurServicesSliceDefaultPrimary {
+  /**
+   * Section Title field in *OurServices → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_services.default.primary.section_title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  section_title: prismic.RichTextField;
+
+  /**
+   * Service Name field in *OurServices → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_services.default.primary.service_name
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  service_name: prismic.RichTextField;
+
+  /**
+   * Service Description field in *OurServices → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_services.default.primary.service_description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  service_description: prismic.RichTextField;
+
+  /**
+   * Service Icon field in *OurServices → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: our_services.default.primary.service_icon
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  service_icon: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for OurServices Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type OurServicesSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<OurServicesSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *OurServices*
+ */
+type OurServicesSliceVariation = OurServicesSliceDefault;
+
+/**
+ * OurServices Shared Slice
+ *
+ * - **API ID**: `our_services`
+ * - **Description**: OurServices
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type OurServicesSlice = prismic.SharedSlice<
+  "our_services",
+  OurServicesSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -161,6 +308,14 @@ declare module "@prismicio/client" {
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      HeroSlice,
+      HeroSliceDefaultPrimary,
+      HeroSliceVariation,
+      HeroSliceDefault,
+      OurServicesSlice,
+      OurServicesSliceDefaultPrimary,
+      OurServicesSliceVariation,
+      OurServicesSliceDefault,
     };
   }
 }
